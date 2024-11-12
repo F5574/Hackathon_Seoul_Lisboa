@@ -3,11 +3,18 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <string.h>
+# include <stdlib.h>
 
-struct s_inc
+typedef struct s_inc
 {
 	char	**image_matrix;
 }	t_inc;
 
+typedef struct s_user
+{
+	int		index;
+	char	*username;
+	char	*message;
+}	t_user;
 
 #endif

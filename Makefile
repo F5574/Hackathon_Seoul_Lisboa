@@ -4,7 +4,7 @@ SRC_DIR = src
 SRC = $(SRC_DIR)/main.c
 
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = 
 
 OBJ_DIR = obj
 OBJS = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
