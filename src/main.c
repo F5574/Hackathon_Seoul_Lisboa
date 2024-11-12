@@ -398,9 +398,17 @@ void picker(const char *landmark)
     const char *path_back = "inc/image/back/";
     char *input[10];
 	printf(WHT"Now you can write your message in the front of the card\n"reset);
-    printf(WHT"(maximum length: 10 character)\n"reset);
-    printf(WHT"MESSAGE:"reset);
-    scanf("%s", input);
+    printf(WHT"(maximum length: 8 character)\n"reset);
+    printf(WHT"PLEASE ZOOM OUT !!ALOT!! BEFORE PRESSING ENTER\n"reset);
+    while (1)
+    {
+        printf(WHT"WORD:"reset);
+        scanf("%s", input);
+        if (ft_strlen(input) < 13)
+            break;
+        else
+			printf(WHT"Your word is too long, try again.\n"reset);
+    }
     draw_front_postcard(input, ft_strjoin(path_front, landmark));
     printf("\n");
 	draw_back_postcard(ft_strjoin(path_back, landmark));
