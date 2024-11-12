@@ -1,17 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-typedef struct s_inc
-{
-    char **image_matrix;
-    char **message_matrix;
-    size_t line_count;
-} t_inc;
-
-#define COLOR_RED     "\x1b[31m"
-#define COLOR_RESET   "\x1b[0m"
+#include "../inc/inc.h"
 
 int load_image_matrix(const char *filename, t_inc *inc)
 {
@@ -370,13 +357,104 @@ int draw_back_postcard(const char *filename)
 	return (0);
 }
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		j;
+	char	*string;
+
+	i = 0;
+	j = 0;
+	string = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (string == NULL)
+		return (0);
+	while (s1[i] != 0)
+	{
+		string[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != 0)
+	{
+		string[i + j] = s2[j];
+		j++;
+	}
+	string[i + j] = 0;
+	return (string);
+}
+
+void picker(const char *landmark)
+{
+    const char *path_front = "inc/image/front/";
+    const char *path_back = "inc/image/back/";
+    char *input[10];
+	printf(WHT"Now you can write your message in the front of the card\n"reset);
+    printf(WHT"(maximum length: 10 character)\n"reset);
+    printf(WHT"MESSAGE:"reset);
+    scanf("%s", input);
+    draw_front_postcard(input, ft_strjoin(path_front, landmark));
+    printf("\n");
+	draw_back_postcard(ft_strjoin(path_back, landmark));
+}
 
 int main()
 {
-	const char* input = "semi jeong";
-    const char* filename = "inc/new_image/gyeongbok_palace_PF";
-	const char* filename2 = "inc/new_image/gyeongbok_palace_PB";
-    draw_front_postcard(input, filename);
-	draw_back_postcard(filename2);
+    int	ret_value;
+    const char* filename;
+    //greetings();
+    printf(BRED "╔ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╗\n\n");
+	printf("║" WHT "\t\tWELCOME TO THE 42 POSTAL SERVICE\t\t" BRED "║\n\n");
+	printf("╚ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╝\n\n");
+	printf(WHT"We offer the most unique postcards from "YEL"Lisbon"WHT" and "BLU"Seoul"WHT"!!\n");
+	printf(WHT"You simply pick from the available landmarks in our "BRED"POSTCARD GENERATOR"WHT".\n\n");
+	printf(BRED "\t╔ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╗\n\n");
+	printf("\t║"WHT"\tPostcard Generator\t"BRED"║\n\n");
+	printf("\t╚ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╝\n\n");
+	printf("\t║      "YEL"1. Belem Tower           "BRED"║\n");
+	printf(YEL"\t       2. 25 de Abril Bridge   \n");
+	printf(BRED"\t║      "YEL"3. Pena Palace           "BRED"║\n");
+	printf("\t       "BLU"4. Cheongye River       \n");
+	printf(BRED"\t║      "BLU"5. Gyeongbok Palace      "BRED"║\n");
+	printf("\t       "BLU"6. N Seoul Tower        \n");
+	printf(BRED"\t║                               ║\n");
+	printf("\t╔ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╗\n");
+	printf("\t║      "WHT"0. Exit                  "BRED"║\n");
+	printf("\t╚ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ╝\n\n" reset);
+    
+    while (1)
+	{
+        //printf(WHT"ZOOM OUT BEFORE PRESSING ENTER\n\n"reset);
+		printf(WHT"Please enter your choice (0-6): "reset);
+		scanf("%d", &ret_value);
+		if (ret_value == 0)
+			break;
+		else if (ret_value >= 1 && ret_value <= 6)
+        {
+            if (ret_value == 1)
+                picker("torre_de_belem");
+            if (ret_value == 2)
+                picker("ponte_25_de_abril");
+            if (ret_value == 3)
+                picker("palacio_da_pena");
+            if (ret_value == 4)
+                picker("cheongye_river");
+            if (ret_value == 5)
+                picker("gyeongbok_palace");
+            if (ret_value == 6)
+                picker("seoul_n_tower");
+            break;
+        }
+		else
+			printf(WHT"That option doesn't exist\n"reset);
+	}
     return 0;
 }
