@@ -348,7 +348,7 @@ int draw_front_postcard(const char *input, const char *filename) {
 	return 0;
 }
 
-int draw_back_postcard()
+int draw_back_postcard(const char *filename)
 {
 		t_inc inc;
     inc.image_matrix = NULL;
@@ -360,8 +360,7 @@ int draw_back_postcard()
         fprintf(stderr, "Error loading image matrix\n");
 		return (1);
     }
-
-
+	return (0);
 }
 
 
