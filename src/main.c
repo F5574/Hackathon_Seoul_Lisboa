@@ -348,11 +348,34 @@ int draw_front_postcard(const char *input, const char *filename) {
 	return 0;
 }
 
+int draw_back_postcard(const char* filename) {
+	t_inc inc;
+    inc.image_matrix = NULL;
+    inc.message_matrix = NULL;
+    inc.line_count = 0;
+
+    if (load_image_matrix(filename, &inc) != 0) {
+        fprintf(stderr, "Error loading image matrix\n");
+        return 1;
+    }
+
+	for (size_t i = 0; i < inc.line_count; i++) {
+        printf("%s\n", inc.image_matrix[i]);
+    }
+
+    free_image_matrix(&inc);
+    return 0;	
+}
 
 int main()
 {
 	const char* input = "semi jeong";
-    const char* filename = "src/image/gyeongbok_palace";
+    const char* filename = "src/image/front/cheongye_river";
     draw_front_postcard(input, filename);
+	printf("\n\n");
+	const char* filename_back = "src/image/back/cheongye_river";
+	draw_back_postcard(filename_back);
+
+
     return 0;
 }
