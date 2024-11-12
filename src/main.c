@@ -360,6 +360,13 @@ int draw_back_postcard(const char *filename)
         fprintf(stderr, "Error loading image matrix\n");
 		return (1);
     }
+
+	for (size_t i = 0; i < inc.line_count; i++) {
+		printf("%s\n", inc.image_matrix[i]);
+	}
+
+	free_image_matrix(&inc);
+
 	return (0);
 }
 
@@ -367,8 +374,8 @@ int draw_back_postcard(const char *filename)
 int main()
 {
 	const char* input = "semi jeong";
-    const char* filename = "src/image/gyeongbok_palace";
-	const char* filename2 = "src/image/gyeongbok_palace";
+    const char* filename = "inc/new_image/gyeongbok_palace_PF";
+	const char* filename2 = "inc/new_image/gyeongbok_palace_PB";
     draw_front_postcard(input, filename);
 	draw_back_postcard(filename2);
     return 0;
